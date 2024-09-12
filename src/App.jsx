@@ -1,4 +1,6 @@
 import "./App.css";
+import { useState } from "react";
+import ContactList from "./components/ContactList/ContactList";
 
 const INITIAL_STATE = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -8,13 +10,13 @@ const INITIAL_STATE = [
 ];
 
 const App = () => {
-  const { contact, setContact } = useState(INITIAL_STATE);
+  const [contacts, setContacts] = useState(INITIAL_STATE);
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList contact={contact} />
+      {/* <ContactForm />
+      <SearchBox /> */}
+      <ContactList contacts={contacts} />
     </div>
   );
 };
