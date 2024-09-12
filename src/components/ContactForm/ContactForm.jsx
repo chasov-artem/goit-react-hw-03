@@ -7,7 +7,7 @@ const FeedbackSchema = Yup.object().shape({
     .min(3, "Too short! Min 3 symbols!")
     .max(50, "Too long! Max 50 symbols!")
     .required("Required!"),
-  number: Yup.number()
+  number: Yup.string()
     .min(3, "Too short! Min 3 symbols!")
     .max(50, "Too long! Max 50 symbols!")
     .required("Required!"),
@@ -25,18 +25,18 @@ const ContactForm = () => {
   return (
     <div>
       <Formik
-        initialValues={{ initialValues }}
+        initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={FeedbackSchema}
       >
         <Form>
-          <label name="name">
+          <label htmlFor="name">
             Name:
             <Field id={nanoid()} type="text" name="name"></Field>
           </label>
           <ErrorMessage name="name" component="span" />
 
-          <label name="number">
+          <label htmlFor="number">
             Number:
             <Field id={nanoid()} type="text" name="number"></Field>
           </label>
