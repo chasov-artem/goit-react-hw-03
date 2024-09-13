@@ -1,10 +1,10 @@
-const Contact = ({ name, number }) => {
+const Contact = ({ name, number, onDelete }) => {
   return (
     <div>
       <li>
         {name} {number}
       </li>
-      <button type="button" name="delete-btn">
+      <button type="button" onClick={onDelete}>
         Delete
       </button>
     </div>

@@ -18,10 +18,13 @@ const initialValues = {
   number: "",
 };
 
-const ContactForm = () => {
+const ContactForm = ({ addContact }) => {
   const handleSubmit = (values, actions) => {
+    const newContact = { id: nanoid(), ...values };
+    addContact(newContact);
     actions.resetForm();
   };
+
   return (
     <div>
       <Formik

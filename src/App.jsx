@@ -15,20 +15,30 @@ const App = () => {
   const [contacts, setContacts] = useState(INITIAL_STATE);
   const [filter, setFilter] = useState("");
 
+  const addContact = (newContact) => {
+    setContacts((prevContacts) => [...prevContacts, newContact]);
+  };
+
+  const deleteContact = (contactID) => {
+    setContacts((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== contactID)
+    );
+  };
+
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
   const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLoverCase().includes(filter.toLowerCase())
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm />
+      <ContactForm addContact={addContact} />
       <SearchBox filter={filter} onFilterChange={handleFilterChange} />
-      <ContactList contacts={filteredContacts} />
+      <ContactList contacts={filteredContacts} deleteContact={deleteContact} />
     </div>
   );
 };
