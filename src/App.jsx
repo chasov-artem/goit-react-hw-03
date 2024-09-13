@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
+import SearchBox from "./components/SearchBox/SearchBox";
 
 const INITIAL_STATE = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -12,12 +13,22 @@ const INITIAL_STATE = [
 
 const App = () => {
   const [contacts, setContacts] = useState(INITIAL_STATE);
+  const [filter, setFilter] = useState("");
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLoverCase().includes(filter.toLowerCase())
+  );
+
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm />
-      {/* <SearchBox /> */}
-      <ContactList contacts={contacts} />
+      <SearchBox filter={filter} onFilterChange={handleFilterChange} />
+      <ContactList contacts={filteredContacts} />
     </div>
   );
 };
