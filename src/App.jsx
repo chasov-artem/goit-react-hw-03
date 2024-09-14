@@ -12,15 +12,11 @@ const INITIAL_STATE = [
 ];
 
 const App = () => {
-  const [contacts, setContacts] = useState(INITIAL_STATE);
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
+  const [contacts, setContacts] = useState(() => {
     const savedContacts = window.localStorage.getItem("contacts");
-    if (savedContacts) {
-      setContacts(JSON.parse(savedContacts));
-    }
-  }, []);
+    return savedContacts ? JSON.parse(savedContacts) : INITIAL_STATE;
+  });
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     window.localStorage.setItem("contacts", JSON.stringify(contacts));
